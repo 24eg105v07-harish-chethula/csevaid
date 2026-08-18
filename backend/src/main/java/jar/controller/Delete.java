@@ -9,29 +9,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import jar.repo.StudentRepo;
+import jar.services.Dservice;
 
 @RestController
 public class Delete {
+  
     @Autowired
-    StudentRepo db;
-
+    Dservice obj;
+    
     @DeleteMapping("/delete/{id}")
     public Map<Object, Object> deleteStudent(@PathVariable long id) {
-
-        Map<Object, Object> res = new HashMap<>();
-
-        if (db.existsById(id)) {
-            db.deleteById(id);
-
-            res.put("msg", "Student Deleted Successfully");
-            res.put("status", 204);
-
-        } else {
-
-            res.put("msg", "Student Not Found");
-            res.put("status", 404);
-        }
-
-        return res;
+       
+       return obj.ds(id);
     }
 }
